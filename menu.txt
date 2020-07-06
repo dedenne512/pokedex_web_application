@@ -1,0 +1,6 @@
+仮想環境:https://qiita.com/nnahito/items/038beb2b
+Djangoインストール：https://qiita.com/ktr11/items/29548540684b38b1535b
+Djangoをvscodeで：https://qiita.com/soh506/items/12a5df2d19f1c2c792fe
+起動：Scripts\activate.bat
+	python manage.py runserver      
+終了：ctrl + C                  
