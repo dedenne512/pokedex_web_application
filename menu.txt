@@ -1,6 +1,12 @@
 仮想環境:https://qiita.com/nnahito/items/038beb2b
 Djangoインストール：https://qiita.com/ktr11/items/29548540684b38b1535b
 Djangoをvscodeで：https://qiita.com/soh506/items/12a5df2d19f1c2c792fe
-起動：Scripts\activate.bat
-	python manage.py runserver      
-終了：ctrl + C                  
+起動：	cd venv
+	Scripts\activate.bat
+	cd pokedex
+	python manage.py runserver
+	http://localhost:8000
+終了：ctrl + C             
+
+db名：pokemon_db
+
