@@ -1,0 +1,14 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block title %}ポケモン一覧{% endblock title %}
+
+{% block content %}
+<div id="content">
+    <div class="inline-group">
+        {% for pokemon in pokemon %}
+        <p class="input-group list-group-item py-3">No.{{ pokemon.number }} {{ pokemon.name_jpn }} <span class="list-group-item" style="display: inline-block;"><img src="{% static 'myapp\\images\\Bulbasaur.gif' %}" width='64px' height='64px' alt=""/></span> <a href="{% url 'pokedex:detail' id=pokemon.id %}">詳しく</a> 見つけた</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
