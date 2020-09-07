@@ -8,6 +8,9 @@ from myapp.models import Pokemon
 def index(request):
     return render(request, 'myapp/index.html')
 
+def camera(request):
+    return render(request, 'myapp/camera2.html')
+
 # ポケモン一覧
 def pokemon_list(request):
     list = Pokemon.objects.all().order_by('id')
