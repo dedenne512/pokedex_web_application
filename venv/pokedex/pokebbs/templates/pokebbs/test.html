@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<title>poke bbs</title>
+		<style>body {padding: 10px;}</style>
+	</head>
+	<body>
+		<h1>OK poke Picture book</h1>
+		<p>{{ message }}</p>
+		{% for PokeArticle in articles %}
+			<p>{{ PokeArticle.Pokename }}</p>
+		{% endfor %}
+	</body>
+</html>

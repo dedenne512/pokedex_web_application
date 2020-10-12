@@ -1,15 +1,16 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset='utf-8'>
-		<title>poke bbs</title>
-		<style>body {padding: 10px;}</style>
-	</head>
-	<body>
-		<h1>OK poke Picture book</h1>
-		<p>{{ message }}</p>
-		{% for pokemon in pokemons %}
-			<p>このモンスターボールには{{ pokemon }}が入っている</p>
-		{% endfor %}
-	</body>
-</html>
+{% extends "pokebbs/base.html" %}
+{% load static %}
+
+{% block title %}トップ{% endblock title %}
+
+{% block content %}
+<div id="content">
+    <div class="card">
+        <h1 class="py-3 px-3">スマホでポケモン図鑑</h1>
+        <a class="py-3 px-3" href="{%url 'pokedex:camera' %}">カメラを起動する</a>
+        <div class="card py-3 px-3">
+            <div class="card-header">アプリの説明</div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

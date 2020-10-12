@@ -1,12 +1,23 @@
 仮想環境:https://qiita.com/nnahito/items/038beb2b
 Djangoインストール：https://qiita.com/ktr11/items/29548540684b38b1535b
 Djangoをvscodeで：https://qiita.com/soh506/items/12a5df2d19f1c2c792fe
-起動：	cd venv
+起動：	
+	cd pokedex_web_application
+	cd venv
 	Scripts\activate.bat
 	cd pokedex
 	python manage.py runserver
-	http://localhost:8000
+	http://localhost:8000/pokebbs/
 終了：ctrl + C             
 
 db名：pokemon_db
 
+db:http://127.0.0.1:8000/admin
+Username:admin
+Password:3939
+
+migration:
+python manage.py makemigrations pokebbs
+python manage.py sqlmigrate pokebbs 0001
+python manage.py migrate
+python manage.py createsuperuser
