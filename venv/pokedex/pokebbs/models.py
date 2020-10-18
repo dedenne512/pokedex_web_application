@@ -18,4 +18,4 @@ class PokeArticle(models.Model):
     voice = models.FilePathField('音声', path='pokebbs/static/pokebbs/voices')
 
     def __str__(self):
-        return self.name_eng
+        return self.name_jpn

@@ -21,3 +21,13 @@ python manage.py makemigrations pokebbs
 python manage.py sqlmigrate pokebbs 0001
 python manage.py migrate
 python manage.py createsuperuser
+
+
+ポケモン画像管理
+https://docs.google.com/spreadsheets/d/10jHmItTWGhedV8Ch-woM9M_4Bnvy563IdcXyO04tCgk/edit#gid=0
+
+ポケモン元データ
+https://zukan.pokemon.co.jp/
+
+音声元
+https://soundoftext.com/
