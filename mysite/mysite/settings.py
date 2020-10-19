@@ -134,7 +134,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-ALLOWED_HOSTS = ['.ngrok.io']
+# ALLOWED_HOSTS = ['.ngrok.io']
 # ALLOWED_HOSTS = ['192.168.11.8']
 
 AUTHENTICATION_BACKENDS = (

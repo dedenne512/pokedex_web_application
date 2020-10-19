@@ -25,6 +25,13 @@
         </div>
     </div>
 
+    <!-- 音声を再生する部分 -->
+    <button onClick="sound()"><img src="{% static '/myapp/images/icon_play.png' %}" /></button>
+    <audio id="voice" pleload="auto">
+        <source src="{% static ''|add:pokemon.voice|slice:'59:' %}" type="audio/mp3">
+    </audio>
+    <br><br>
+
     ずかんのせつめい
     <div class="card">
         <div class="card-body text-center">{{ pokemon.detail }}</div>

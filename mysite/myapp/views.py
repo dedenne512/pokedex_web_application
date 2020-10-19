@@ -13,7 +13,7 @@ def camera(request):
 
 # ポケモン一覧
 def pokemon_list(request):
-    list = Pokemon.objects.all().order_by('id')
+    list = Pokemon.objects.all().order_by('number')
     return render(
         request,
         'myapp/list.html',
