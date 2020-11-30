@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,6 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '917101251088-vfrpn48claf04q6h1j013efmehsillnd.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'roxK32AlL29Js-FFYRLVF4nz'
 
 # Application definition
 
@@ -134,10 +138,21 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# ALLOWED_HOSTS = ['.ngrok.io']
+ALLOWED_HOSTS = ['.ngrok.io']
 # ALLOWED_HOSTS = ['192.168.11.8']
 
 AUTHENTICATION_BACKENDS = (
+    'social_core.backends.open_id.OpenIdAuth',
+    'social_core.backends.google.GoogleOpenId',
     'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

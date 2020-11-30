@@ -19,3 +19,19 @@ class Pokemon(models.Model):
 
     def __str__(self):
         return self.name_eng
+
+
+# class Users(models.Model):
+#     user_name = models.CharField('名前', max_length=255)
+#     email = models.CharField('Eメール', max_length=255)
+#     pokedex_flag = models.BooleanField('図鑑解禁フラグ', default=False)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+
+#     def __str__(self):
+#         return self.email
+
+
+# class Pokedex_status(models.Model):
+#     user_name = models.ForeignKey(Users, on_delete=models.CASCADE)
+#     pokedex_flag = models.ForeignKey()
