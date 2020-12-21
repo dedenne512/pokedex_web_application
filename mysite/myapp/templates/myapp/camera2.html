@@ -1,42 +1,51 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8" />
     <title>RearCamera</title>
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <!-- <link rel="stylesheet" href="index.css" /> -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link href="{% static 'myapp/css/camera.css' %}" rel=stylesheet>
+    <!-- <link rel="stylesheet" href="../../static/myapp/css/camera.css"> -->
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-            background: #000;
-        }
+    <script src="{% static 'myapp/js/camera.js' %}"></script>
 
-        #video {
-            display: block;
-            width: 100%;
-        }
-    </style>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 </head>
 
 <body>
-    <video id="video" autoplay playsinline></video>
-    <div class="d-flex">
-        <button class="btn" style="background-color: rgb(119, 3, 3);" type="button" id="shutter2">　　　</button>
-        <form ml-auto>
-            <button class="btn btn-primary" type="button" id="shutter">　　　</button>
-        </form>
+    <div id="wrap">
+        <video id="video" autoplay playsinline></video>
+        <canvas id="picture" class="d-none"></canvas>
+        <div class="d-flex" id="control">
+            <form method="post" enctype="multipart/form-data">
+                <label for="image" class="btn btn-secondary">
+                    画像を選択
+                    <input id="image" class="d-none" type="file" name="image">
+                </label>
+            </form>
+            <button class="btn btn-danger px-4" type="button" id="change_btn">change</button>
+            <form>
+                <button class="btn btn-primary px-4" type="button" id="shutter">shutter</button>
+            </form>
+            <button class="btn btn-secondary px-4" type="button" id="cancel">cancel</button>
+
+            <audio id="se" preload="auto">
+                <source src="{% static 'myapp/voices/shutter.mp3' %}" type="audio/mp3">
+            </audio>
+        </div>
     </div>
+
     <!-- <script src="index.js"></script> -->
-    <script>
+    <!-- <script>
         const medias = {
             audio: false,
             video: {
@@ -59,7 +68,7 @@
         function errorCallback(err) {
             alert(err);
         };
-    </script>
+    </script> -->
 </body>
 
 </html>
