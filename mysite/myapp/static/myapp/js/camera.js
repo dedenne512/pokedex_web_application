@@ -5,12 +5,14 @@ window.onload = () => {
     const canvas = document.querySelector("#picture");
     const se = document.querySelector('#se');
     const cancel = document.querySelector('#cancel');
-    
+
     var w = video.clientWidth;
     var h = video.clientHeight;
 
-    // canvas.setAttribute('width', w);
-    // canvas.setAttribute('height', h);
+    window.alert("width : " + w + " height : " + h);
+
+    canvas.setAttribute('width', w);
+    canvas.setAttribute('height', h);
 
     var mode = cameraFacing ? 'environment' : 'user';
 
@@ -24,9 +26,11 @@ window.onload = () => {
 
     // シャッタークリック後ストリームに戻る処理
     cancel.addEventListener('click', e => {
+        canvas.removeAttribute('width');
+        canvas.removeAttribute('height');
         canvas.classList.add('d-none');
         video.play();
-    });  
+    });
 
     // clickイベントリスナーで、切り替えボタンがタップされた時に切り替えを行う。
     change_btn.addEventListener('click', (e) => {
@@ -70,7 +74,20 @@ window.onload = () => {
             // }, 500);
 
             // canvasに画像を貼り付ける
-            // ctx.drawImage(video, 0, 0, w, h);
+            ctx.drawImage(video, 0, 0, w, h);
+
+            // 画像に変換する処理
+            canvas.toBlob(blob => {
+                var newImg = document.createElement('img'),
+                    url = URL.createObjectURL(blob);
+
+                newImg.onload = () => {
+                    URL.revokeObjectURL(url);
+                };
+
+                newImg.src = url;
+                canvas.appendChild(newImg);
+            }, 'image/jpeg', 0.95);
         });
     });
 
@@ -124,7 +141,7 @@ window.onload = () => {
     document.querySelector('#shutter').addEventListener('click', () => {
         const ctx = canvas.getContext('2d');
 
-        canvas.classList.toggle('d-none');
+        // canvas.classList.toggle('d-none');
 
         // 演出的な目的で一度映像を止めてSEを再生する
         video.pause();  // 映像を停止
@@ -133,17 +150,17 @@ window.onload = () => {
         //     video.play();    // 0.5秒後にカメラ再開
         // }, 500);
 
-        const wrap = document.querySelector('#wrap');
-        wrap.setAttribute('overflow', 'hidden');
-        wrap.setAttribute('width', w);
-        wrap.setAttribute('height', h);
+        // const wrap = document.querySelector('#wrap');
+        // wrap.setAttribute('overflow', 'hidden');
+        // wrap.setAttribute('width', w);
+        // wrap.setAttribute('height', h);
 
-        // canvasに画像を貼り付ける
-        canvas.setAttribute('width', w);
-        canvas.setAttribute('height', h);
-        video.setAttribute('width', w);
-        video.setAttribute('height', h);
-        canvas.setAttribute('max-height', h);
+        // // canvasに画像を貼り付ける
+        // canvas.setAttribute('width', w);
+        // canvas.setAttribute('height', h);
+        // video.setAttribute('width', w);
+        // video.setAttribute('height', h);
+        // canvas.setAttribute('max-height', h);
         ctx.drawImage(video, 0, 0, w, h);
 
         // 画像に変換する処理
@@ -157,6 +174,7 @@ window.onload = () => {
 
             newImg.src = url;
             canvas.appendChild(newImg);
+
         }, 'image/jpeg', 0.95);
     });
 };

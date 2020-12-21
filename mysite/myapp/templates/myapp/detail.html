@@ -12,7 +12,7 @@
             <p>ぶんるい　{{ pokemon.classification }}ポケモン</p>
         </div>
         <div class="col">
-            <img src="{% static ''|add:pokemon.image|slice:'59:' %}" width="64px" height="64px"></img>
+            <img src="{{ pokemon.image.url }}" width="64px" height="64px"></img>
             <!-- <figure style="background-color: gray; height: 150px; width: 150px; color: #fff; line-height: 150px; text-align: center;">画像</figure> -->
         </div>
     </div>
@@ -25,11 +25,6 @@
         </div>
     </div>
 
-    <!-- 音声を再生する部分 -->
-    <button onClick="sound()"><img src="{% static '/myapp/images/icon_play.png' %}" /></button>
-    <audio id="voice" pleload="auto">
-        <source src="{% static ''|add:pokemon.voice|slice:'59:' %}" type="audio/mp3">
-    </audio>
     <br><br>
 
     ずかんのせつめい

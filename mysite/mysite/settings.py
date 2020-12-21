@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '917101251088-vfrpn48claf04q6h1j013efmehsillnd.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'roxK32AlL29Js-FFYRLVF4nz'
 
@@ -44,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp.apps.MyappConfig', # myapp
     'social_django',
+    # 'cloudinary',
+    # 'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -138,6 +139,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
 ALLOWED_HOSTS = ['.ngrok.io']
 # ALLOWED_HOSTS = ['192.168.11.8']
 
@@ -148,11 +151,20 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'index'
-LOGOUT_REDIRECT_URL = 'index'
+LOGIN_URL = 'pokedex:login'
+LOGIN_REDIRECT_URL = 'pokedex:index'
+LOGOUT_REDIRECT_URL = 'pokedex:index'
 
-SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_URL_NAMESPACE = 'pokedex:social'
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': 'dhbnkgqat',
+#     'API_KEY': '546222822676288',
+#     'API_SECRET': 'kkfBTs_VwhzBKDNbV45ITDAX3vE'
+# }
+
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

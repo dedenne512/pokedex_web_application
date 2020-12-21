@@ -7,7 +7,7 @@
 <div id="content">
     <div class="inline-group">
         {% for pokemon in pokemon %}
-        <p class="input-group list-group-item py-3">No.{{ pokemon.number }} {{ pokemon.name_jpn }} <span class="list-group-item" style="display: inline-block;"><img src="{% static ''|add:pokemon.image|slice:'59:' %}" width='28px' height='28px' /></span> <a href="{% url 'pokedex:detail' id=pokemon.id %}">詳しく</a> 見つけた</p>
+        <p class="input-group list-group-item py-3">No.{{ pokemon.number }} {{ pokemon.name_jpn }} <span class="list-group-item" style="display: inline-block;"><img src="{{ pokemon.image.url }}" width='28px' height='28px' /></span> <a href="{% url 'pokedex:detail' id=pokemon.id %}">詳しく</a> 見つけた</p>
         {% endfor %}
     </div>
 </div>
