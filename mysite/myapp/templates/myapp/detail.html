@@ -1,9 +1,4 @@
-{% extends "myapp/base.html" %}
-{% load static %}
-
-{% block title %}{{ pokemon.name_jpn }}の詳細{% endblock title %}
-
-{% block content %}
+{% extends "myapp/base.html" %} {% load static %} {% block title %}{{ pokemon.name_jpn }}の詳細{% endblock title %} {% block content %}
 <div id="content">
     <div class="d-flex">
         <div class="col">
@@ -30,12 +25,18 @@
     <audio id="voice" pleload="auto">
         <source src="{% static ''|add:pokemon.voice|slice:'59:' %}" type="audio/mp3">
     </audio>
-    <br><br>
-
-    ずかんのせつめい
+    <br><br> ずかんのせつめい
     <div class="card">
         <div class="card-body text-center">{{ pokemon.detail }}</div>
     </div>
 </div>
+<hr>
+<footer>
+    <div class="container text-secondary">
+        <small>
+                <p>ポケットモンスター・ポケモン・Pokémonは<a href="https://www.nintendo.co.jp" target="_blank">任天堂</a>・<a href="http://www.creatures.co.jp" target="_blank">クリーチャーズ・<a href="http://www.gamefreak.co.jp" target="_blank">ゲームフリーク</a>の登録商標です。</a></p>
+                <p>当アプリは個人ファンメイドのウェブアプリであり、<a href="http://www.pokemon.co.jp" target="_blank">株式会社ポケモン</a>他企業様とは一切関係ありません。下記はサイト独自の内容に関する著作権を示すものです。</p>
+            </small>
+    </div>
+</footer>
 {% endblock content %}
-

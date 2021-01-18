@@ -8,6 +8,8 @@
             <p>ポケモンの写真をカメラから撮影するか、ファイルから選択することで画像分析を行います。</p>
         </div>
     </div>
+    {% if user.is_authenticated %} {{ user.username }}でログイン中 {% else %}
+    <a class="btn btn-primary" href="{% url 'login' %}">ログイン</a> {% endif %}
     <div id="guide">
         <div class="d-sm-flex py-sm-3">
             <div class="col px-sm-0">
