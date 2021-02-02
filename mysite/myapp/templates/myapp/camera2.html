@@ -42,46 +42,39 @@
                 <source src="{% static 'myapp/voices/shutter.mp3' %}" type="audio/mp3">
             </audio>
         </div>
-    </div>
-    <div class="modal fade show" tabindex="-1" aria-labelledby="candidate" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 id="candidate" class="modal-title">候補のポケモン</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col card">
-                            <div class="card-img-top">
-                                <img src="" alt="候補のポケモン1">
-                            </div>
-                            <div class="card-title">
-                                <h3>ポケモン名</h3>
-                            </div>
-                        </div>
-                        <div class="col card">
-                            <div class="card-img-top">
-                                <img src="" alt="候補のポケモン1">
-                            </div>
-                            <div class="card-title">
-                                <h3>ポケモン名</h3>
-                            </div>
-                        </div>
-                        <div class="col card">
-                            <div class="card-img-top">
-                                <img src="" alt="候補のポケモン1">
-                            </div>
-                            <div class="card-title">
-                                <h3>ポケモン名</h3>
-                            </div>
+        <!-- ここから「/.card」までを候補のポケモンの有無で表示/非表示を切り替えたい。非表示は「d-none」のクラスを追加するだけ -->
+        <div class="card">
+            <div class="card-header">
+                <h4>候補のポケモン</h4>
+            </div>
+            <div class="card-body">
+                <a href="">
+                    <div class="col card">
+                        <img class="card-img card-img-top" src="" alt="候補のポケモン1">
+                        <div class="card-title">
+                            <h3>ポケモン名1</h3>
                         </div>
                     </div>
-                </div>
+                </a>
+                <a href="">
+                    <div class="col card">
+                        <img class="card-img card-img-top" src="" alt="候補のポケモン2">
+                        <div class="card-title">
+                            <h3>ポケモン名2</h3>
+                        </div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="col card">
+                        <img class="card-img card-img-top" src="" alt="候補のポケモン3">
+                        <div class="card-title">
+                            <h3>ポケモン名3</h3>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
+        <!-- /.card -->
     </div>
 
     <!-- <script src="index.js"></script> -->
