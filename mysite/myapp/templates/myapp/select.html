@@ -1,0 +1,27 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block title %}トップ{% endblock title %}
+
+{% block content %}
+<div id="content">
+    <div class="card">
+        <h1 class="py-3 px-3">スマホでポケモン図鑑</h1>
+        <form action="{% url 'pokedex:predict' %}" method="post" class="form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="custom-file">
+                    {{ form.image }}
+                    <label class="custom-file-label" for="customFile">
+                        画像ファイルを選択
+                    </label>
+                </div>
+            </div>
+            <br>
+            <div class="btn-wrapper">
+                <button type="submit" class="btn btn-secondary btn-lg btn-block">画像判別スタート</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

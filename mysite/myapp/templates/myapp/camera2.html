@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>RearCamera</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <!-- <link rel="stylesheet" href="index.css" /> -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link href="{% static 'myapp/css/camera.css' %}" rel=stylesheet>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="{% static 'myapp/js/camera.js' %}"></script>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+</head>
+
+<body>
+    <!-- <div id="wrap" style="z-index: 0;"> -->
+        <video id="video" autoplay playsinline></video>
+        <canvas id="picture" class="d-none"></canvas>
+
+    <!-- </div> -->
+    <div class="d-flex" id="control">
+        <button class="btn px-2" style="background-color: rgb(119, 3, 3);" type="button" id="change_btn">change</button>
+        <!-- <form ml-auto> -->
+            <button class="btn btn-primary px-2" type="button" id="shutter">shutter</button>
+        <!-- </form> -->
+        <button class="btn px-2 btn-secondary" type="button" id="cancel">cancel</button>
+
+        <audio id="se" preload="auto">
+            <source src="{% static 'myapp/voices/shutter.mp3' %}" type="audio/mp3">
+        </audio>
+    </div>
+
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="image">
+    </form>
+</body>
+
+</html>

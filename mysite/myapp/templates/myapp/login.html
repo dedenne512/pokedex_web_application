@@ -1,0 +1,17 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block title %}ログイン{% endblock title %}
+
+{% block content %}
+<div id="content">
+    <div class="card">
+        <h1 class="py-3 px-3">ログインする</h1>
+            <p>撮った写真をアプリ内のアルバムに保存したり、<br>
+                図鑑完成状況を保存するためにはログインが必要になります<br>
+                Googleアカウントを利用してログインすることですぐに始められます
+            </p>
+            <a href="{% url 'pokedex:social:begin' 'google-oauth2' %}">Googleでログイン</a>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block title %}設定{% endblock title %}
+
+{% block content %}
+<div id="content">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default my-2">
+            <div class="panel-heading" role="tab" id="pwa">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#pwaArea"
+                    aria-expanded="false" aria-controls="pwaArea">
+                    <h3 class="btn btn-outline-info panel-title text-center">
+                        ホーム画面にアイコンを追加する方法 <i class="fas fa-chevron-down icon pt-1"></i>
+                    </h3>
+                </a>
+            </div>
+            <div id="pwaArea" class="panel-collapse collapse" role="tabpanel" aria-labelledby="pwa">
+                <div class="panel-body">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <div id="pwa-guide-iphone" class="card mb-5">
+                                <div class="card-header h2 bg-info text-white pl-2 py-2">iPhoneの場合</div>
+                                <div class="card-body">
+                                    <div class="guide py-3">
+                                        <p>1.ホーム画面に追加を選択</p>
+                                        <p>2.右上にある追加を選択</p>
+                                        <p>3.ホーム画面にアイコンが作成される</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="pwa-guide-android" class="card my-5">
+                                <div class="card-header h2 bg-info text-white pl-2 py-2">Androidの場合</div>
+                                <div class="card-body">
+                                    <div class="guide py-3">
+                                        <p>1.ポップアップからホーム画面に追加を選択</p>
+                                        <p>2.追加を選択</p>
+                                        <p>3.ホーム画面にアイコンが作成される</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ログインしていなければログインボタンを出し、ログイン中はログインユーザー名を出す -->
+    {% if user.is_authenticated %}
+    {{ user.username }}でログイン中
+    <a href="{% url 'pokedex:logout' %}">ログアウト</a>
+    {% endif %}
+</div>
+{% endblock content %}
