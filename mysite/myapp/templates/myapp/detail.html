@@ -1,36 +1,84 @@
 {% extends "myapp/base.html" %}
 {% load static %}
 
-{% block title %}{{ pokemon.name_jpn }}の詳細{% endblock title %}
+{% block title %}{{ p_data.name_jpn }}の詳細{% endblock title %}
 
 {% block content %}
 <div id="content">
     <div class="d-flex">
         <div class="col">
-            <p>ずかんナンバー　No.{{ pokemon.number }}</p>
-            <p>{{ pokemon.name_jpn }}</p>
-            <p>ぶんるい　{{ pokemon.classification }}ポケモン</p>
+            <p>ずかんナンバー<br>No.{{ p_data.number }}</p>
+            <p>{{ p_data.name_jpn }}</p>
+            <p>ぶんるい<br>{{ p_data.classification }}ポケモン</p>
         </div>
         <div class="col">
-            <img src="{{ pokemon.image.url }}" width="64px" height="64px"></img>
-            <!-- <figure style="background-color: gray; height: 150px; width: 150px; color: #fff; line-height: 150px; text-align: center;">画像</figure> -->
+            <img class="img-thumbnail img-fluid" src="{{ image.image.url }}"
+                style="width:100px;height:100px;object-fit:cover;">
         </div>
     </div>
     <div class="d-flex">
         <div class="col">
-            <p>たかさ　：　{{ pokemon.height }}m</p>
+            <p>たかさ　：　{{ p_data.height }}m</p>
         </div>
         <div class="col">
-            <p>おもさ　：　{{ pokemon.weight }}kg</p>
+            <p>おもさ　：　{{ p_data.weight }}kg</p>
+        </div>
+    </div>
+    <hr>
+
+    <br><br> ずかんのせつめい
+    <div class="card">
+        <!-- <div class="card-body text-center">{{ pokemon.detail }}</div> -->
+    </div>
+    <hr>
+    <div class="card">
+        <div class="card-header">
+            <h5>アルバム</h5>
+        </div>
+        <div class="card-body">
+            <div class="d-flex">
+                {% for p in p_image %}
+                <a data-toggle="modal" data-target="#t{{ p.predict_id }}"><img class="img-thumbnail img-fluid"
+                        src="{{ p.image.url }}" style="width:100px;height:100px;object-fit:cover;"></a>
+                {% endfor %}
+            </div>
         </div>
     </div>
 
-    <br><br>
-
-    ずかんのせつめい
-    <div class="card">
-        <div class="card-body text-center">{{ pokemon.detail }}</div>
+    {% for p in p_image %}
+    <div class="modal fade" id="t{{ p.predict_id }}" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">{{ p.created_at }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ p.image.url }}" class="img-fluid text-center" width=200px />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                    <a href="{% url 'pokedex:delete' id=p.predict_id %}" class="btn btn-primary"><button type="button" class="btn btn-primary">画像を削除</button></a>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-{% endblock content %}
+    {% endfor %}
 
+</div>
+<hr>
+<footer>
+    <div class="container text-secondary">
+        <small>
+            <p>ポケットモンスター・ポケモン・Pokémonは<a href="https://www.nintendo.co.jp" target="_blank">任天堂</a>・<a
+                    href="http://www.creatures.co.jp" target="_blank">クリーチャーズ・<a href="http://www.gamefreak.co.jp"
+                        target="_blank">ゲームフリーク</a>の登録商標です。</a></p>
+            <p>当アプリは個人ファンメイドのウェブアプリであり、<a href="http://www.pokemon.co.jp"
+                    target="_blank">株式会社ポケモン</a>他企業様とは一切関係ありません。下記はサイト独自の内容に関する著作権を示すものです。</p>
+        </small>
+    </div>
+</footer>
+{% endblock content %}

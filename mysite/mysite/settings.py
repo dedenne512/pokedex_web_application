@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp.apps.MyappConfig', # myapp
     'social_django',
+    'django_cleanup.apps.CleanupConfig',
     # 'cloudinary',
     # 'cloudinary_storage',
 ]
@@ -67,6 +69,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.media',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -92,7 +95,7 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
+        'NAME': 'postgres2',
         'USER': 'postgres',
         'PASSWORD': '0198',
         'HOST': '127.0.0.1',
@@ -141,8 +144,8 @@ STATIC_URL = '/static/'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
-ALLOWED_HOSTS = ['.ngrok.io']
-# ALLOWED_HOSTS = ['192.168.11.8']
+# ALLOWED_HOSTS = ['.ngrok.io']
+ALLOWED_HOSTS = ['*']
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.open_id.OpenIdAuth',
@@ -160,6 +163,7 @@ SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
 
 # CLOUDINARY_STORAGE = {
 #     'CLOUD_NAME': 'dhbnkgqat',

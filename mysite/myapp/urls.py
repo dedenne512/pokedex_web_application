@@ -16,4 +16,5 @@ urlpatterns = [
     path('select/', views.select, name='select'),
     path("predict/", views.predict, name="predict"),
     path('save/', views.save, name='save'),
+    path('delete/<int:id>/', views.delete, name='delete')
 ]

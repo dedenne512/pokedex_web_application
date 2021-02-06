@@ -1,14 +1,40 @@
 {% extends "myapp/base.html" %}
 {% load static %}
+{% load filter %}
 
 {% block title %}ポケモン一覧{% endblock title %}
 
 {% block content %}
 <div id="content">
-    <div class="inline-group">
-        {% for pokemon in pokemon %}
-        <p class="input-group list-group-item py-3">No.{{ pokemon.number }} {{ pokemon.name_jpn }} <span class="list-group-item" style="display: inline-block;"><img src="{{ pokemon.image.url }}" width='28px' height='28px' /></span> <a href="{% url 'pokedex:detail' id=pokemon.id %}">詳しく</a> 見つけた</p>
-        {% endfor %}
-    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ナンバー</th>
+                <th scope="col">ポケモン名</th>
+                <th scope="col">画像</th>
+                <th scope="col">判別</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for poke in poke %}
+            {% if pred|get_name:poke.name_eng %}
+            <tr>
+                <th scope="row">No.{{ poke.number }}</th>
+                <td><a href="{% url 'pokedex:detail' id=poke.id %}">{{ poke.name_jpn }}</a></td>
+                <td><img src="/media/{{ pred|get_name:poke.name_eng }}"
+                        style="width:64px;height:64px;object-fit:cover;" /></td>
+                <td><img src="/media/images/get_icon.png" width='28px' height='28px' /></td>
+            </tr>
+            {% else %}
+            <tr>
+                <th scope="row">No.???</th>
+                <td>？？？？？</td>
+                <td><img src="/media/images/no_image.png" width='64px' height='64px' /></td>
+                <td><img src="/media/images/get_icon.png" width='28px' height='28px' style="opacity: 20%;" /></td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock content %}

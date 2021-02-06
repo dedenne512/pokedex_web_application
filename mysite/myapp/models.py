@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 import numpy as np
 import keras, sys
 import tensorflow.compat.v1 as tf
@@ -14,7 +15,7 @@ class PredictedImage(models.Model):
 
     IMAGE_SIZE = 64 #画像サイズ
     MODEL_PATH="./myapp/ml_models/cnn.h5"
-    classes = ["Blastoise", "Bulbasaur", "Charizard", "Charmander", "Charmeleon", "Diglett", "Dragonite", "Eevee", "Flareon", "Ivysaur", "Jolteon", "Magikarp", "Pidgey", "Pikachu", "Snorlax", "Squirtle", "Vaporeon", "Venusaur", "Vulpix", "Wartortle"]
+    classes = ["Arcanine", "Articuno", "Blastoise", "Bulbasaur", "Charizard", "Charmander", "Ditto", "Dragonair", "Dragonite", "Eevee", "Gengar", "Jolteon", "Lapras", "Magnemite", "Mew", "Mewtwo", "Muk", "Nidoking", "Ninetales", "Pikachu", "Pinsir", "Porygon", "Psyduck", "Raichu", "Slowpoke", "Snorlax", "Squirtle", "Vaporeon", "Venusaur", "Vulpix"]
     num_classes = len(classes)
 
     def predict(self):
@@ -60,31 +61,20 @@ class Pokemon(models.Model):
     ability1 = models.CharField('特性1', max_length=255)
     ability2 = models.CharField('特性2', null=True, max_length=255)
     hidden_ability = models.CharField('夢特性', null=True, max_length=255)
-    detail = models.TextField('図鑑説明', max_length=500)
-    image = models.ImageField('画像', upload_to='images', blank=True)
+    # detail = models.TextField('図鑑説明', max_length=500)
+    # image = models.ImageField('画像', upload_to='images/', blank=True)
     # voice = models.FilePathField('音声', path=r'E:\develop\git\pokedex_web_application\mysite\myapp\static\myapp\voices')
 
     def __str__(self):
         return self.name_eng
 
 
-# class Users(models.Model):
-#     user_id = models.AutoField('ユーザーID', primary_key=True)
-#     user_name = models.CharField('名前', max_length=255)
-#     email = models.CharField('Eメール', max_length=255)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-
-#     def __str__(self):
-#         return self.email
-
-
 class Predicts(models.Model):
     predict_id = models.AutoField('判別ID', primary_key=True)
-    user_email = models.CharField('Eメール', max_length=500)
-    pokemon_id = models.ForeignKey(Pokemon, on_delete=models.CASCADE)
-    image = models.ImageField('画像', upload_to='images', blank=True)
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE)
+    image = models.ImageField('画像', upload_to="images/", blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return 'User:' + self.user_email + ' Pokemon:' + self.pokemon_id + ' date:' + self.created_at
+        return 'User:' + str(self.author) + '　Pokemon:' + str(self.pokemon_id) + '　Date:' + str(self.created_at)

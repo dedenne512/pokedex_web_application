@@ -1,13 +1,18 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from myapp.models import Pokemon, PredictedImage, Predicts
 from django.template.loader import get_template
 from myapp.forms import UploadImageForm
 import datetime
-from django.contrib.auth.models import User
-import base64, io
+import base64, io, os
 from PIL import Image
 from io import BytesIO
+import cv2
+import numpy as np
+from django.core.files import File
+
 
 # Create your views here.
 
@@ -20,20 +25,41 @@ def camera(request):
 
 # ポケモン一覧
 def pokemon_list(request):
-    list = Pokemon.objects.all().order_by('number')
+    predict_list = Predicts.objects.filter(author__id=request.user.id)
+    pokemon_list = Pokemon.objects.all().order_by('number')
+
+    dic = {}
+
+    for poke in pokemon_list:
+        for pred in predict_list:
+            if poke.number == pred.pokemon.number:
+                dic[poke.name_eng] = pred.image
+                break
+
+    print(dic)
+
     return render(
         request,
         'myapp/list.html',
-        {'pokemon': list}
+        {
+            'poke': pokemon_list,
+            'pred': dic
+        }
     )
 
 def detail(request, id):
+    poke_images = Predicts.objects.filter(author__id=request.user.id, pokemon__id=id)
     poke_info = Pokemon.objects.get(id = id)
+
+    poke_image = poke_images[0]
+
     return render(
         request,
         'myapp/detail.html',
         {
-            'pokemon': poke_info
+            'p_image': poke_images,
+            'p_data': poke_info,
+            'image': poke_image
         }
     )
 
@@ -71,7 +97,8 @@ def predict(request):
 
     data = {
         'pokemon_id': poke_info.id,
-        'photo': photo_data
+        'photo': photo_data,
+        'photo_name': photo.image.name
     }
 
     request.session['predicted_data'] = data
@@ -82,28 +109,30 @@ def save(request):
     if not 'predicted_data' in request.session:
         return redirect('pokedex:select')
     
+    if not request.user.is_authenticated:
+        return redirect('pokedex:select')
+    
     pred = request.session['predicted_data']
     poke_id = pred['pokemon_id']
     photo_str = pred['photo']
+    photo_name = pred['photo_name']
 
-    poke_info = Pokemon.objects.get(id = poke_id)
-
-    # imgdata = base64.b64decode(photo_str)
-    # filename = poke_info.name_eng + '.jpg'  # I assume you have a way of picking unique filenames
-    # with open(filename, 'wb') as f:
-    #     f.write(imgdata)
-    #     template = get_template("myapp/index.html")
+    poke_info = Pokemon.objects.only('id').get(id = poke_id)
 
 
-    # imgdata = Image.open(BytesIO(base64.b64decode(photo_str)))
-    # imgdata.save(poke_info.name_eng + '.jpg', 'JPEG')
+    img = base64.b64decode(photo_str.encode())
+    with open(photo_name, 'bw') as f4:
+        im = f4.write(img)
 
-    user = User.objects.get()
+    user_model = get_user_model()
+    user_data = user_model.objects.only('id').get(id=request.user.id)
 
-    im = Image.open(BytesIO(base64.b64decode(photo_str)))
-    output = BytesIO()
-    im_img = im.save(output, "JPEG")
-    jpg_img = output.read()
+    Predicts.objects.create(author=user_data, pokemon=poke_info, image=File(open(photo_name, 'rb')))
 
-    Predicts.objects.create(user_email=user.username, pokemon_id_id=poke_id, image=im_img)
+    os.remove(photo_name)
+
+    return redirect('pokedex:index')
+
+def delete(request, id):
+    Predicts.objects.filter(predict_id=id).delete()
     return redirect('pokedex:index')
