@@ -1,37 +1,5 @@
-# pokedex_web_application
-
-☆開発環境☆
-フロント
-HTML
-CSS
-JavaScript
-Bootstrap
-
-バックエンド
-Python
-Django
-
-機械学習
-TensorFlow
-Keras
-
-アプリ化
-PWA
-
-・データベース
-MySQL
-
-・デプロイするためのサーバー
-AWSかGCPで（無理なら最悪Heroku）
-
-・開発管理
-GitHub
 
 
-☆機能☆
-・ログイン機能
-python-social-authを利用してgoogleまたはTwitterアカウントでログインする
+https://colab.research.google.com/drive/1boF3SNO4x5LKLUEy7POxL6Dm7XTaUnia#scrollTo=qDLHiUtSonRT&uniqifier=6
 
-・画像を保存するストレージ
-未定
-
+で作成された学習済みモデル(H5ファイル)を mysite/myapp/ml_models/　の中に置く
