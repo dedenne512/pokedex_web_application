@@ -6,7 +6,7 @@ chardet==3.0.4
 cloudinary==1.23.0
 cryptography==3.1
 defusedxml==0.7.0rc1
-Django==3.1.1
+Django==3.1.12
 django-bootstrap4==2.2.0
 django-cloudinary-storage==0.3.0
 idna==2.10
